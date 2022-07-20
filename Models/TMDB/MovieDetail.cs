@@ -19,7 +19,7 @@ public class MovieDetail
     public Production_Countries[] production_countries { get; set; }
     public string release_date { get; set; }
     public int revenue { get; set; }
-    public int runtime { get; set; }
+    public string runtime { get; set; }
     public Spoken_Languages[] spoken_languages { get; set; }
     public string status { get; set; }
     public string tagline { get; set; }
