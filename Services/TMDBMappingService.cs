@@ -1,4 +1,5 @@
-﻿using MoviePro.Enums;
+﻿using Microsoft.Extensions.Options;
+using MoviePro.Enums;
 using MoviePro.Models.Database;
 using MoviePro.Models.Settings;
 using MoviePro.Models.TMDB;
@@ -12,9 +13,9 @@ public class TMDBMappingService : IDataMappingService
     private readonly IImageService _imageService;
     private readonly IRemoteMovieService _tmdbMovieService;
 
-    public TMDBMappingService(AppSettings appSettings, IImageService imageService, IRemoteMovieService tmdbMovieService)
+    public TMDBMappingService(IOptions<AppSettings> appSettings, IImageService imageService, IRemoteMovieService tmdbMovieService)
     {
-        _appSettings = appSettings;
+        _appSettings = appSettings.Value;
         _imageService = imageService;
         _tmdbMovieService = tmdbMovieService;
     }

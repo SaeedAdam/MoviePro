@@ -1,0 +1,121 @@
+﻿@using MoviePro.Models.Database
+@using MoviePro.Services.Interfaces
+@inject IImageService ImageService
+@model Movie
+
+
+<div class="row mx-5">
+    <div class="col-sm-12 col-md-6">
+        <div class="row">
+            <img src="@ImageService.DecodeImage(Model.Poster, Model.PosterType)" class="w-100" alt="...">
+        </div>
+
+        <div class="row">
+            <button class="btn btn-lg btn-danger " data-toggle="modal"
+                    data-target="#trailer">
+                WATCH TRAILER
+            </button>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-6">
+        <div class="row">
+            <div class="col h5">
+                <span class="fw-bold me-2">TITLE:</span> @Model.Title
+            </div>
+        </div>
+        <hr />
+
+        <div class="row">
+            <div class="col h5">
+                <span class="fw-bold me-2">RELEASED:</span> @Model.ReleaseDate.ToString("MMM dd, yyyy")
+            </div>
+        </div>
+        <hr />
+
+        <div class="row">
+            <div class="col h5">
+                <span class="fw-bold me-2">RATING:</span> @Model.Rating
+            </div>
+        </div>
+        <hr />
+
+        <div class="row">
+            <div class="col h5">
+                <span class="fw-bold me-2">REVIEWS:</span> @Model.VoteAverage / 10
+            </div>
+        </div>
+        <hr />
+
+        <div class="row mt-3 mb-2">
+            <div class="col">
+                <span class="h5 fw-bolder"> OVERVIEW:</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <span class="h5 fw-bolder ms-4">@Model.Overview</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <span class="h5 fw-bolder"> STARRING:</span>
+    </div>
+</div>
+
+@foreach (var actor in Model.Cast.Take(5))
+{
+    <div class="row">
+        <div class="col">
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-2">
+                        <img src="@actor.ImageUrl" class="img-fluid" style="width: 10rem" alt="...">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="card-body">
+                            <h5 class="card-title"><a asp-action="Details" asp-controller="Actors" asp-route-id="@actor.CastID">Name: @actor.Name</a></h5>
+                            <p class="card-text">Character: @actor.Character</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Modal -->
+<div class="modal fade" id="trailer" tabindex="-1" role="dialog" aria-labelledby="trailerLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">@Model.Title</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="ratio ratio-16x9">
+                    @{
+                        //I am isolating a piece of data in order to use it as my embed source
+                        var key = Model.TrailerUrl.Split("=").Last();
+                        var source = $"https://www.youtube.com/embed/{key}";
+                    }
+
+                    <iframe width="560" height="315" src="@source" 
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+﻿@using MoviePro.Models.TMDB
+@model ActorDetail
+
+
+<div class="m-4">
+    <div class="d-flex">
+        <div class="flex-shrink-0">
+            <img src="@Model.profile_path" class="rounded" alt="Sample Image">
+        </div>
+        <div class="flex-grow-1 ms-5">
+            <h2>@Model.name</h2>
+            <hr />
+            <p>@Model.biography</p>
+            <hr />
+            <p>@Model.birthday</p>
+            <hr />
+            <p>@Model.place_of_birth</p>
+        </div>
+    </div>
+</div>
