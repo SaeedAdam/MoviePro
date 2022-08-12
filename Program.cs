@@ -93,8 +93,8 @@ public class Program
         app.MapRazorPages();
 
         // Create instance of our SeedService and call initial migration
-        var dataService = app.Services.CreateScope().ServiceProvider.GetRequiredService<SeedService>();
-        await dataService.ManageDataAsync();
+        //var dataService = app.Services.CreateScope().ServiceProvider.GetRequiredService<SeedService>();
+        //await dataService.ManageDataAsync();
 
         // To test if Sentry is correctly configure run the following command
         //SentrySdk.CaptureMessage("Hello Sentry, MoviePro application launched");
