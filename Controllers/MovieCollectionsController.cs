@@ -38,7 +38,7 @@ public class MovieCollectionsController : Controller
         var moviesNotInCollection = await _context.Movie.AsNoTracking().Where(m => movieIdsNotInCollection.Contains(m.Id)).ToListAsync();
         ViewData["IdsNotInCollection"] = new MultiSelectList(moviesNotInCollection, "Id", "Title");
 
-        return View();
+        return Ok();
 
 
     }

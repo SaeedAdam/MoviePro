@@ -23,7 +23,7 @@ public class CollectionsController : Controller
         var defaultCollectionName = _appSettings.MovieProSettings.DefaultCollection.Name;
         var collections = await _context.Collection.Where(c => c.Name != defaultCollectionName).ToListAsync();
 
-        return View(collections);
+        return Ok(collections);
     }
 
     // POST: Collections/Create
@@ -51,7 +51,7 @@ public class CollectionsController : Controller
         {
             return NotFound();
         }
-        return View(collection);
+        return Ok(collection);
     }
 
     // POST: Collections/Edit/5
@@ -91,7 +91,7 @@ public class CollectionsController : Controller
             }
             return RedirectToAction(nameof(Index));
         }
-        return View(collection);
+        return Ok(collection);
     }
 
     // GET: Collections/Delete/5
@@ -114,7 +114,7 @@ public class CollectionsController : Controller
             return RedirectToAction("Index", "Collections");
         }
 
-        return View(collection);
+        return Ok(collection);
     }
 
     // POST: Collections/Delete/5

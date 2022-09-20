@@ -28,18 +28,18 @@ public class MoviesController : Controller
     public async Task<IActionResult> Import()
     {
         var movies = await _context.Movie.ToListAsync();
-        return View(movies);
+        return Ok(movies);
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Import(int id)
-    { 
+    {
         //If we already have this movie we can just warn the user instead of importing it again
         if (_context.Movie.Any(m => m.MovieId == id))
         {
             var localMovie = _context.Movie.FirstOrDefault(m => m.MovieId == id);
-            return RedirectToAction("Details", "Movies", new {id = localMovie.Id, local = true});
+            return RedirectToAction("Details", "Movies", new { id = localMovie.Id, local = true });
         }
 
         //Step 1: Get the raw data from the API 
@@ -61,14 +61,14 @@ public class MoviesController : Controller
     public async Task<IActionResult> Library()
     {
         var movies = await _context.Movie.ToListAsync();
-        return View(movies);
+        return Ok(movies);
     }
 
     // GET: Temp/Create
     public IActionResult Create()
     {
         ViewData["CollectionId"] = new SelectList(_context.Collection, "Id", "Name");
-        return View();
+        return Ok();
     }
 
     // POST: Temp/Create
@@ -94,7 +94,7 @@ public class MoviesController : Controller
 
             return RedirectToAction("Index", "MovieCollections");
         }
-        return View(movie);
+        return Ok(movie);
     }
 
     // GET: Temp/Edit/5
@@ -110,7 +110,7 @@ public class MoviesController : Controller
         {
             return NotFound();
         }
-        return View(movie);
+        return Ok(movie);
     }
 
     // POST: Temp/Edit/5
@@ -157,7 +157,7 @@ public class MoviesController : Controller
             }
             return RedirectToAction("Details", "Movies", new { id = movie.Id, local = true });
         }
-        return View(movie);
+        return Ok(movie);
     }
 
     // GET: Temp/Delete/5
@@ -175,7 +175,7 @@ public class MoviesController : Controller
             return NotFound();
         }
 
-        return View(movie);
+        return Ok(movie);
     }
 
     // POST: Temp/Delete/5
