@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MoviePro.Models;
-using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using MoviePro.Data;
 using MoviePro.Enums;
+using MoviePro.Models;
+using MoviePro.Models.ViewModels;
 using MoviePro.Services.Interfaces;
-using MoviePro.ViewModels;
+using System.Diagnostics;
 
 namespace MoviePro.Controllers;
 public class HomeController : Controller
@@ -22,6 +22,7 @@ public class HomeController : Controller
     }
 
     public async Task<IActionResult> Index()
+
     {
         const int count = 16;
         var data = new LandingPageVM()

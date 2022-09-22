@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MoviePro.Enums;
+using MoviePro.Models.TMDB;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using MoviePro.Enums;
 
 namespace MoviePro.Models.Database;
 
@@ -12,7 +13,7 @@ public class Movie
     public string TagLine { get; set; }
     public string Overview { get; set; }
     public string RunTime { get; set; }
-
+    public Genre[] genres { get; set; }
 
     [DataType(DataType.Date)]
     [Display(Name = "Release Date")]

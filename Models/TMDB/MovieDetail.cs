@@ -124,7 +124,7 @@ public class Release_Date
     public int type { get; set; }
 }
 
-public class Genre
+public partial class Genre
 {
     public int id { get; set; }
     public string name { get; set; }
