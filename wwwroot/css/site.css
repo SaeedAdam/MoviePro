@@ -14,10 +14,7 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
-    background-image: url('/images/bg-dark.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
+    margin-bottom: 60px;
 }
 #notfound {
     position: relative;
